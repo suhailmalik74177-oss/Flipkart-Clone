@@ -10,6 +10,7 @@ function Cards({ imgUrl, title }) {
       />
       <p className="text-sm font-medium text-gray-800">{title}</p>
     </div>
+    hjbfnkjfdnjinkirndfjhvkej
   )
 }
 
