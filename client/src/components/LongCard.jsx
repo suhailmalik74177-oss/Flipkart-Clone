@@ -13,21 +13,21 @@ function LongCard({ Url, AltUrl, Next }) {
   };
  
   return (
-    <div className="flex items-center w-full sm:w-full pt-2 pl-2 cursor-pointer transform transition-transform duration-300 ">
+    <div className="flex justify-center items-center w-full sm:w-full pt-2 pl-2 cursor-pointer transform transition-transform duration-300 ">
       <button 
         onClick={onClick} 
-        className=" flex items-center px-4  h-65 bg-white  hover:bg-gray-300 rounded-l"
+        className=" flex items-center px-2  h-65 bg-white  hover:bg-gray-300 rounded-l"
       >
         <GoChevronLeft size={20}/>
       </button>
       <img 
         src={imgSrc} 
         alt='' 
-        className="w-[93%]  h-30 sm:h-65 object-cover  shadow-md"
+        className="w-[95%]  h-30 sm:h-65 object-cover  shadow-md"
       />
       <button 
         onClick={onClick} 
-        className=" flex items-center  px-4  h-65 bg-white  hover:bg-gray-300 rounded-r"
+        className=" flex items-center  px-2  h-65 bg-white  hover:bg-gray-300 rounded-r"
       >
         <GoChevronRight size={20}/>
       </button>

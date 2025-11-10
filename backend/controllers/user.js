@@ -1,6 +1,9 @@
 import { user } from "../models/userModel.js";
 import bcrypt from 'bcryptjs';
+import { genrateToken } from "../utils/genrateToken.js";
 
+
+//signup page 
 export async function Register (req,res){
     try{
         
@@ -47,18 +50,54 @@ export async function Register (req,res){
     }
 }
 
-export async function Login(req,res){
+//LOGIN PAGE
+
+export const login = async (req, res) => {
     try {
-        const {Email_ID,Password}=req.body
-        console.log('Request body in login', req.body);
-
-        const findUser = await user.findOne({Email_ID})
-
-        if(findUser){
-             const compPass = bcrypt.compare(Password,findUser.Password)
+        const { Email_ID, Password } = req.body //dstructure
+        console.log(req.body);
+        
+         if (!Email_ID || !Password) {
+            return res.status(400).json({
+                message: 'all fields are required',
+                error: true,
+                success: false
+            })
         }
+         const findUser = await user.findOne({ Email_ID }) // check if user already exists or not
+        console.log(findUser);
         
+         if(!findUser){
+             return res.status(404).json({
+                message: 'user does not exists',
+                error: true,
+                success: false
+            })
+         }
+
+         const comparePass = await bcrypt.compare(Password , findUser.Password )
+
+         if(!comparePass){
+             return res.status(401).json({
+                message: 'wrong password',
+                error: true,
+                success: false
+            })
+         }
+
+         const jwtToken=await genrateToken(findUser)
+        
+         return res.status(200)
+         .cookie('accessToken' , jwtToken.accessToken , jwtToken.Options )
+         .json({
+                message: 'Login Successfull',
+                error: false,
+                success: true
+            })
+
+
     } catch (error) {
-        
+        console.log(error);
     }
-} 
+
+}

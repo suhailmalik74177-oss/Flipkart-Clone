@@ -6,8 +6,6 @@ import AppRouter from './routers/Router'
 import Footer from './pages/Footer'
 import { UserProvider } from './pages/UserContext'
 
- 
-
 
 function App() {
 

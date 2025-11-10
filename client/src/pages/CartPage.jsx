@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 
 const FlipkartStyleCart = () => {
+  // Ek Array banaya hai 
   const [cartItems, setCartItems] = useState([
     { id: 1, name: 'Smartphone XYZ', price: 12000, quantity: 1 },
     { id: 2, name: 'Wireless Earbuds', price: 2500, quantity: 2 },
     { id: 3, name: 'Smartwatch ABC', price: 8000, quantity: 1 },
     { id: 4, name: 'Laptop DEF', price: 45000, quantity: 1 },
-    { id: 5, name: 'Bluetooth Speaker', price: 3000, quantity: 1 },
-    { id: 6, name: 'Gaming Mouse', price: 1500, quantity: 1 },
-    { id: 7, name: 'Mechanical Keyboard', price: 4000, quantity: 1 },
-    { id: 8, name: '4K Monitor', price: 20000, quantity: 1 },
-    { id: 9, name: 'External Hard Drive', price: 6000, quantity: 1 },
-    { id: 10, name: 'USB-C Hub', price: 2500, quantity: 1 },
   ]);
 
   const handleRemove = (id) => {
@@ -22,7 +17,7 @@ const FlipkartStyleCart = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-blue-600 mb-6">My Cart</h1>
+      <h1 className="text-3xl font-bold text-green-600 mb-6">My Cart</h1>
       
       {cartItems.length === 0 ? (
         <p className="text-gray-500 text-center mt-20">Your cart is empty</p>
@@ -50,7 +45,7 @@ const FlipkartStyleCart = () => {
 
           <div className="mt-6 flex justify-end items-center space-x-4">
             <h2 className="text-xl font-bold">Total: ₹{total}</h2>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
               Proceed to Checkout
             </button>
           </div>

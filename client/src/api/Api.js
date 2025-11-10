@@ -16,3 +16,15 @@ export async function register(data){
         console.log(error);
     } 
 }
+
+export async function login(data) {
+    try {
+        const response =await api.post('api/login',data)
+        console.log(response);
+        
+    } catch (error) {
+        console.log(error);
+            
+    }
+    
+}

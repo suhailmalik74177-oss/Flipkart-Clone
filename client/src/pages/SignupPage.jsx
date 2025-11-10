@@ -28,7 +28,7 @@ function SignupPage() {
             console.log("JSON format:", jsonData);
             
             register(userData)
-                alert("Account created successfully!");
+                // alert("Account created successfully!");
         } catch (error) {
             console.log(error);
         }
@@ -43,9 +43,9 @@ function SignupPage() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="flex bg-white shadow-2xl rounded-lg overflow-hidden w-[850px]">
         {/* Left Side - Info Section */}
-        <div className="w-2/5 bg-blue-600 text-white flex flex-col justify-center items-center p-8">
+        <div className="w-2/5 bg-green-600 text-white flex flex-col justify-center items-center p-8">
           <h2 className="text-3xl font-semibold mb-3">Sign Up</h2>
-          <p className="text-sm text-blue-100 mb-4 text-center">
+          <p className="text-sm text-green-100 mb-4 text-center">
             Create your account to start shopping with Flipkart!
           </p>
           <img
@@ -65,7 +65,7 @@ function SignupPage() {
                 placeholder="Enter Your FullName"
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full border-b border-gray-400 focus:outline-none focus:border-blue-600 py-2"
+                className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
               />
             </div>
             <div>
@@ -75,7 +75,7 @@ function SignupPage() {
                 placeholder="Enter Email Id"
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full border-b border-gray-400 focus:outline-none focus:border-blue-600 py-2"
+                className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
               />
             </div>
             <div>
@@ -85,20 +85,20 @@ function SignupPage() {
                 placeholder="Create Password"
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full border-b border-gray-400 focus:outline-none focus:border-blue-600 py-2"
+                className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
               />
             </div>
 
             <p className="text-sm text-gray-500">
               By continuing, you agree to Flipkart’s{" "}
-              <span className="text-blue-600 cursor-pointer">Terms of Use</span> and{" "}
-              <span className="text-blue-600 cursor-pointer">Privacy Policy</span>.
+              <span className="text-green-600 cursor-pointer">Terms of Use</span> and{" "}
+              <span className="text-green-600 cursor-pointer">Privacy Policy</span>.
             </p>
 
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-sm font-semibold hover:bg-blue-700 transition"
+              className="w-full bg-green-600 text-white py-2 rounded-sm font-semibold hover:bg-green-700 transition"
             >
               Sign Up
             </button>
@@ -108,7 +108,7 @@ function SignupPage() {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-blue-600 cursor-pointer font-medium hover:underline"
+              className="text-green-600 cursor-pointer font-medium hover:underline"
             >
               Login here
             </Link>
