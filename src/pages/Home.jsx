@@ -143,18 +143,18 @@ function Home() {
         </div>
 
 
-        {/* ProductCard ke liye  */}
+        {/* SideProductCard ke liye  */}
         <div>
              <div className="p-4 pb-0 grid grid-cols-1 md:grid-cols-3 gap-4">
 
-              <div className="md:col-span-2 space-y-4 bg-amber-300 h-fit">              
+              <div className="md:col-span-2 space-y-4  h-fit">              
           <ProductSection title="Best Deals on Designer Furniture" products={furnitureProducts} />
                     <ProductSection title="Best Deals on Home Decor" products={decorProducts} />
                     
                 </div>
-<div className="bg-gray-100 flex flex-col justify-center items-center rounded-lg h-full text-center">             
-           <ProductCard imgUrl='https://rukminim1.flixcart.com/www/1060/1460/promos/26/09/2023/6c3c5fe2-c236-4fa2-8d97-595e1e01da01.jpg?q=60'/>
-                </div>
+                    <div className="bg-gray-100 flex flex-col justify-center items-center rounded-lg h-fit text-center">             
+                        <ProductCard imgUrl='https://i.pinimg.com/474x/21/81/b1/2181b1f2fd0fb0006b0e1a48a51edbdc.jpg'/>
+                    </div>
                 </div>
         </div>
 
@@ -200,15 +200,15 @@ function Home() {
         </div>
 
 
-         {/* ProductCard ke liye  */}
+         {/* SideProductCard ke liye  */}
         <div>
              <div className="p-4 pb-0 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="md:col-span-2 space-y-4">
                     <ProductSection title="Best Deals on Designer Furniture" products={favoritesProducts} />
                     <ProductSection title="Fashion's Top Deals" products={fashionProducts} />
                 </div>
-                <div className="bg-gray-100 flex flex-col justify-center items-center rounded-lg h-[90%] text-center">
-                    <ProductCard imgUrl='https://rukminim1.flixcart.com/www/1060/1460/promos/15/09/2023/9c056ec4-f39c-4740-938d-33e1a6c7c108.jpg?q=60'/>
+                <div className="bg-gray-100 flex flex-col justify-center items-center rounded-lg h-fit text-center">
+                    <ProductCard imgUrl='https://i.pinimg.com/736x/87/0a/4c/870a4c76f327372338017ff402554cd5.jpg'/>
                    
                 </div>
                 </div>

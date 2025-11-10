@@ -38,8 +38,8 @@ const Navbar = () => {
           />
       
         {/* Navbar Links */}
-          <ul className='flex gap-6 font-medium items-center '>
-            <li className='hidden sm:flex'>
+          <ul className='flex gap-6 font-medium items-center'>
+            <li className='hidden sm:flex '>
               <Link to="/login" className='flex items-center gap-1 hover:scale-103 '>
                 <CgProfile size={27}/>Login
               </Link>          
