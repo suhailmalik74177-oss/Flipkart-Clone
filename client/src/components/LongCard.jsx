@@ -36,4 +36,3 @@ function LongCard({ Url, AltUrl, Next }) {
 }
 
 export default LongCard;
-

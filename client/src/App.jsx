@@ -5,15 +5,15 @@ import Navbar from './components/Navbar'
 import AppRouter from './routers/Router'
 import Footer from './pages/Footer'
 import { UserProvider } from './pages/UserContext'
-
+import InstallPWA from './components/InstallPWA'
 
 function App() {
-
   return (
-   <UserProvider>
-   <Navbar />
-    <AppRouter />
-   <Footer />
+    <UserProvider>
+      <Navbar />
+      <AppRouter />
+      <Footer />
+      <InstallPWA />
     </UserProvider>
   )
 }
