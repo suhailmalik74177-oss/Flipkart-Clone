@@ -1,9 +1,9 @@
+// client/src/api/Api.js
 import axios from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
   withCredentials: true,
-  // ❌ remove Content-Type, axios will set it automatically for FormData
 });
 
 export async function register(formData) {
@@ -28,7 +28,6 @@ export async function register(formData) {
     };
   }
 }
-
 
 export async function login(data) {
   try {

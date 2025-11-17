@@ -1,3 +1,4 @@
+// client/src/pages/UserContext.jsx
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 const UserContext = createContext();
@@ -13,10 +14,11 @@ export const UserProvider = ({ children }) => {
     }
   }, []);
 
-  const saveUser = (name, email, token) => {
-    const newUser = { name, email };
-    setUser(newUser);
-    localStorage.setItem("user", JSON.stringify(newUser));
+  // accept a full user object (frontend shape) and optional token
+  const saveUser = (userData, token) => {
+    if (!userData) return;
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
     if (token) localStorage.setItem("token", token);
   };
 
