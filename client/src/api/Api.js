@@ -3,12 +3,15 @@ import axios from "axios";
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
   withCredentials: true,
-  headers: { "Content-Type": "application/json" },
+  // ❌ remove Content-Type, axios will set it automatically for FormData
 });
 
-export async function register(data) {
+export async function register(formData) {
   try {
-    const response = await api.post("/api/register", data);
+    const response = await api.post("/api/register", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
     return {
       success: true,
       message: response.data?.message || "Registration successful!",
@@ -25,6 +28,7 @@ export async function register(data) {
     };
   }
 }
+
 
 export async function login(data) {
   try {

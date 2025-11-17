@@ -3,6 +3,9 @@ import 'dotenv/config'
 import cors from 'cors'
 import { connectDB } from './config/db.js'
 import userRouter from './routes/route.js'
+import { connectCloudinary } from './config/cloudinary.js'
+
+
 
 const app = express()
 
@@ -15,6 +18,10 @@ app.use(cors({
 }))
 
 app.use('/api', userRouter);
+
+connectCloudinary()
+
+
 
 connectDB().then(()=>{
 app.listen(process.env.PORT, ()=>{
