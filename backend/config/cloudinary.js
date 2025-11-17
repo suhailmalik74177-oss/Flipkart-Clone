@@ -1,0 +1,1 @@
+import cloudinaryjsjs from 'cloudinary';
