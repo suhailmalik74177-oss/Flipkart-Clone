@@ -1,48 +1,50 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register } from "../api/Api";
+import { useUser } from "./UserContext";
 
 function SignupPage() {
+  const { saveUser } = useUser();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
+    try {
+      const userData = {
+        FullName: name,
+        Email_ID: email,
+        Password: password,
+      };
 
-    setName("");
-    setEmail("");
-    setPassword("");
+      const res = await register(userData);
 
-            try {
-            const userData = {
-                FullName: name,
-                Email_ID: email,
-                Password: password
-            };
-            
-            const jsonData = JSON.stringify(userData);
-            
-            console.log("Object format:", userData);
-            console.log("JSON format:", jsonData);
-            
-            register(userData)
-                // alert("Account created successfully!");
-        } catch (error) {
-            console.log(error);
-        }
+      if (res.success) {
+        saveUser(name, email, res.token);
+        alert("🎉 Account created successfully!");
+        navigate("/");
+      } else {
+        setError(res.message);
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      setError("Something went wrong. Try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
-
-  
-
-    
-
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="flex bg-white shadow-2xl rounded-lg overflow-hidden w-[850px]">
-        {/* Left Side - Info Section */}
+        {/* Left Side */}
         <div className="w-2/5 bg-green-600 text-white flex flex-col justify-center items-center p-8">
           <h2 className="text-3xl font-semibold mb-3">Sign Up</h2>
           <p className="text-sm text-green-100 mb-4 text-center">
@@ -55,52 +57,46 @@ function SignupPage() {
           />
         </div>
 
-        {/* Right Side - Form Section */}
+        {/* Right Side */}
         <div className="w-3/5 p-8 flex flex-col justify-center">
           <form className="space-y-5" onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="text"
-                value={name}
-                placeholder="Enter Your FullName"
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                value={email}
-                placeholder="Enter Email Id"
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
-              />
-            </div>
-            <div>
-              <input
-                type="password"
-                value={password}
-                placeholder="Create Password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
-              />
-            </div>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
-            <p className="text-sm text-gray-500">
-              By continuing, you agree to Flipkart’s{" "}
-              <span className="text-green-600 cursor-pointer">Terms of Use</span> and{" "}
-              <span className="text-green-600 cursor-pointer">Privacy Policy</span>.
-            </p>
-
+            <input
+              type="text"
+              value={name}
+              placeholder="Enter Full Name"
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
+            />
+            <input
+              type="email"
+              value={email}
+              placeholder="Enter Email Id"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
+            />
+            <input
+              type="password"
+              value={password}
+              placeholder="Create Password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full border-b border-gray-400 focus:outline-none focus:border-green-600 py-2"
+            />
 
             <button
               type="submit"
-              className="w-full bg-green-600 text-white py-2 rounded-sm font-semibold hover:bg-green-700 transition"
+              disabled={loading}
+              className={`w-full text-white py-2 rounded-sm font-semibold transition ${
+                loading
+                  ? "bg-green-300 cursor-not-allowed"
+                  : "bg-green-600 hover:bg-green-700"
+              }`}
             >
-              Sign Up
+              {loading ? "Creating Account..." : "Sign Up"}
             </button>
           </form>
 

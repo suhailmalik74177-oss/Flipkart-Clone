@@ -97,7 +97,7 @@ const BecomeSeller = () => {
             style={{
               width: '100%',
               padding: '12px',
-              background: 'linear-gradient(90deg, #007bff, #00b4d8)',
+              background: 'green',
               color: '#fff',
               fontSize: '16px',
               border: 'none',

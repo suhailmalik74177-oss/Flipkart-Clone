@@ -1,24 +1,29 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
-// 1️⃣ Context create kar rahe hain
 const UserContext = createContext();
 
-// 2️⃣ Provider component
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
+  const [user, setUser] = useState(null);
 
-  // Login ya update karne ka function
-  const saveUser = (name, email, password) => {
-    setUser({ name, email, password });
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
+    if (storedUser && storedToken) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const saveUser = (name, email, token) => {
+    const newUser = { name, email };
+    setUser(newUser);
+    localStorage.setItem("user", JSON.stringify(newUser));
+    if (token) localStorage.setItem("token", token);
   };
 
-  // Logout ya clear karne ka function
   const clearUser = () => {
-    setUser({ name: "", email: "", password: "" });
+    setUser(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   return (
@@ -28,7 +33,4 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-// 3️⃣ Custom hook for easy access
-export const useUser = () => {
-  return useContext(UserContext);
-};
+export const useUser = () => useContext(UserContext);
