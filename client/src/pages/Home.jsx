@@ -34,6 +34,7 @@ function Home() {
             <Cards key={i} imgUrl={img} title={title} />
           ))}
         </div>
+        
       </div>
 
       {/* ===== Long Banner ===== */}
@@ -63,6 +64,20 @@ function Home() {
                 ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759252362/shopping_5_idr7ar.webp", "Oppo Find X8 Pro", "₹94,999"],
                 ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759252366/shopping_4_xjwgud.webp", "Galaxy A56 5G", "₹24,999"],
                 ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759252367/shopping_1_p7wijz.webp", "Realme 14 Pro", "₹28,999"],
+              ].map(([img, name, price], i) => (
+                <MobileCards key={i} imgUrl={img} name={name} price={`Just ${price}*`} />
+              ))}
+            </div>
+            <div className="flex gap-3 sm:gap-4 pb-2">
+              {[
+                ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759252367/shopping_1_p7wijz.webp", "Google Pixel 9a", "₹44,599"],
+                ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759252366/shopping_4_xjwgud.webp", "Vivo V50 5G", "₹32,999"],
+                ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759252362/shopping_5_idr7ar.webp", "OnePlus 13R 5G", "₹37,999"],
+                ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759251844/shopping_mzjfi4.webp", "Oppo Reno13 5G", "₹26,999"],
+                ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759251844/612UANCQFyL_olyimc.jpg", "Vivo X200 FE 5G", "₹51,999"],
+                ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759251763/shopping_2_xbwy2f.webp", "Oppo Find X8 Pro", "₹94,999"],
+                ["https://res.cloudinary.com/dleixx6wj/image/upload/v1759251543/shopping_1_atcrrm.webp", "Galaxy A56 5G", "₹24,999"],
+                ["https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/0/q/f/-original-imahadxg8mgjzrfh.jpeg?q=70", "Realme 14 Pro", "₹28,999"],
               ].map(([img, name, price], i) => (
                 <MobileCards key={i} imgUrl={img} name={name} price={`Just ${price}*`} />
               ))}

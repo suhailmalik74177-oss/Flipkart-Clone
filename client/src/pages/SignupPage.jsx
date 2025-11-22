@@ -66,11 +66,11 @@ function SignupPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100">
       <div className="flex bg-white shadow-2xl rounded-2xl overflow-hidden w-[900px] max-w-full flex-col sm:flex-row">
-        <div className="hidden sm:flex w-2/5 bg-green-600 text-white flex-col justify-center items-center p-8 relative">
+        <div className="hidden sm:flex w-2/5 bg-blue-600 text-white flex-col justify-center items-center p-8 relative">
           <h2 className="text-3xl font-semibold mb-3">Sign Up</h2>
-          <p className="text-sm text-green-100 mb-4 text-center leading-relaxed">
+          <p className="text-sm text-blue-100 mb-4 text-center leading-relaxed">
             Create your Flipkart account and start shopping smarter!
           </p>
           <img
@@ -88,7 +88,7 @@ function SignupPage() {
               alt="Signup Illustration"
               className="w-32 mx-auto mb-2"
             />
-            <h2 className="text-2xl font-bold text-green-700">Create Account</h2>
+            <h2 className="text-2xl font-bold text-blue-700">Create Account</h2>
             <p className="text-gray-600 text-sm mt-1">Join Flipkart to start shopping</p>
           </div>
 
@@ -104,9 +104,9 @@ function SignupPage() {
                 <img
                   src={profilePic}
                   alt="Profile"
-                  className="w-24 h-24 rounded-full border-4 border-green-200 object-cover shadow-md hover:scale-105 transition-transform"
+                  className="w-24 h-24 rounded-full border-4 border-blue-200 object-cover shadow-md hover:scale-105 transition-transform"
                 />
-                <label className="absolute bottom-0 right-0 bg-green-600 text-white p-1 rounded-full cursor-pointer shadow hover:bg-green-700 transition">
+                <label className="absolute bottom-0 right-0 bg-blue-600 text-white p-1 rounded-full cursor-pointer shadow hover:bg-blue-700 transition">
                   <FiUploadCloud size={18} />
                   <input
                     type="file"
@@ -125,7 +125,7 @@ function SignupPage() {
               placeholder="Enter Full Name"
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
 
             <input
@@ -134,7 +134,7 @@ function SignupPage() {
               placeholder="Enter Email Id"
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
 
             <input
@@ -143,14 +143,14 @@ function SignupPage() {
               placeholder="Create Password"
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
 
             <button
               type="submit"
               disabled={loading}
               className={`w-full text-white py-3 rounded-lg font-semibold text-sm tracking-wide transition ${
-                loading ? "bg-green-300 cursor-not-allowed" : "bg-green-600 hover:bg-green-700 active:scale-95"
+                loading ? "bg-blue-300 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 active:scale-95"
               }`}
             >
               {loading ? "Creating Account..." : "Sign Up"}
@@ -159,7 +159,7 @@ function SignupPage() {
 
           <p className="text-sm text-gray-600 text-center mt-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-green-600 cursor-pointer font-medium hover:underline">
+            <Link to="/login" className="text-blue-600 cursor-pointer font-medium hover:underline">
               Login here
             </Link>
           </p>
