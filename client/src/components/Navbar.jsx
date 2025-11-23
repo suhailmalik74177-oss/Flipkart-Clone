@@ -1,3 +1,4 @@
+// client/src/components/Navbar.jsx
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import {
@@ -27,9 +28,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
-      {/* Top Row */}
       <div className="flex justify-between items-center px-3 sm:px-8 py-2 sm:py-3">
-        {/* Logo */}
         <Link to="/" className="flex-shrink-0">
           <img
             src="https://res.cloudinary.com/dleixx6wj/image/upload/v1762965184/Gemini_Generated_Image_hth87ahth87ahth8_xquhqc.png"
@@ -38,7 +37,6 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* Search Box */}
         <div className="flex items-center bg-gray-100 rounded-md px-3 py-1 w-2/3 sm:max-w-xl mx-3">
           <IoSearch
             size={20}
@@ -53,9 +51,7 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Right Icons (Desktop) */}
         <ul className="hidden sm:flex items-center gap-5 text-sm font-medium">
-          {/* Profile */}
           <li className="relative group">
             {user ? (
               <>
@@ -64,7 +60,6 @@ const Navbar = () => {
                   <span>{user.name || "Account"}</span>
                 </button>
 
-                {/* Dropdown */}
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                   <ul className="py-2 text-gray-700">
                     <li>
@@ -104,7 +99,6 @@ const Navbar = () => {
             )}
           </li>
 
-          {/* Cart */}
           <li>
             <Link
               to="/cart"
@@ -114,7 +108,6 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {/* Seller */}
           <li className="hidden lg:flex">
             <Link
               to="/become-seller"
@@ -124,7 +117,6 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {/* More */}
           <li className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -179,7 +171,6 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Mobile Icons */}
         <div className="flex sm:hidden items-center gap-3">
           <Link to="/cart">
             <RiShoppingCart2Line size={22} className="text-gray-700" />
@@ -190,7 +181,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="bg-white border-t border-gray-200 sm:hidden">
           <ul className="flex flex-col text-sm text-gray-700">

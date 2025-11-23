@@ -13,21 +13,21 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    profilePic: user?.profilePic || "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    name: "",
+    email: "",
+    profilePic: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
   });
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) navigate("/login");
-    else {
-      setFormData({
-        name: user.name || "",
-        email: user.email || "",
-        profilePic: user.profilePic || "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-      });
-    }
+    if (!user) return navigate("/login");
+
+    setFormData({
+      name: user.name || "",
+      email: user.email || "",
+      profilePic: user.profilePic || "",
+    });
   }, [user, navigate]);
 
   const handleChange = (e) => {
@@ -36,31 +36,31 @@ function Profile() {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+
     if (file) {
       setFormData((prev) => ({
         ...prev,
         profilePic: URL.createObjectURL(file),
-        _newLocalFile: file, // optional if you want to later upload update
       }));
     }
   };
 
   const handleSave = () => {
-    if (!formData.name.trim() || !formData.email.trim()) {
-      alert("Please fill in all required fields before saving.");
-      return;
-    }
-    // update local user object (this doesn't update server)
-    const updatedUser = {
+    if (!user) return;
+
+    const updated = {
       ...user,
       name: formData.name,
       email: formData.email,
       profilePic: formData.profilePic,
     };
-    saveUser(updatedUser, user?.token);
+
+    // saveUser will update local storage & context
+    saveUser(updated, user.token);
     setIsEditing(false);
+
     setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 2500);
+    setTimeout(() => setIsSaved(false), 2000);
   };
 
   const handleLogout = () => {
@@ -72,22 +72,24 @@ function Profile() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 flex items-center justify-center p-6">
-      <div className="w-full max-w-3xl bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-100 transition-transform duration-300 hover:scale-[1.01]">
+      <div className="w-full max-w-3xl bg-white shadow-2xl rounded-2xl overflow-hidden">
         <div className="relative bg-gradient-to-r from-green-600 to-green-500 h-44 flex items-center justify-center">
-          <div className="absolute top-4 right-4 text-white text-sm font-medium opacity-80">
-            Member since {user.joinedDate ? new Date(user.joinedDate).toLocaleDateString() : "January 2024"}
-          </div>
-
-          <div className="absolute bottom-[-60px] flex flex-col items-center">
+          <div className="absolute bottom-[-60px]">
             <div className="relative">
               <img
                 src={formData.profilePic}
                 alt="Profile"
-                className="w-28 h-28 rounded-full border-4 border-white shadow-lg transition-transform duration-300 hover:scale-105 object-cover"
+                className="w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover"
               />
+
               {isEditing && (
                 <label className="absolute bottom-0 right-0 bg-white p-1 rounded-full shadow cursor-pointer">
-                  <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
                   <FiEdit2 className="text-green-600" size={18} />
                 </label>
               )}
@@ -96,67 +98,85 @@ function Profile() {
         </div>
 
         <div className="mt-20 px-10 pb-10">
-          <h2 className="text-3xl font-semibold text-gray-800 text-center mb-10">My Profile</h2>
+          <h2 className="text-3xl font-semibold text-gray-800 text-center mb-10">
+            My Profile
+          </h2>
 
           <div className="space-y-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex justify-between items-center">
               <label className="text-gray-600 font-medium flex items-center gap-2">
                 <CgProfile className="text-green-600" /> Full Name
               </label>
+
               {isEditing ? (
                 <input
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="border-b border-gray-300 focus:outline-none focus:border-green-600 py-2 w-full sm:w-2/3 bg-transparent transition"
+                  className="border-b border-gray-300 focus:border-green-600 py-2 w-2/3 bg-transparent"
                 />
               ) : (
-                <p className="text-gray-800 font-semibold">{user.name || user.FullName}</p>
+                <p className="text-gray-800 font-semibold">{formData.name}</p>
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex justify-between items-center">
               <label className="text-gray-600 font-medium flex items-center gap-2">
                 <MdEmail className="text-green-600" /> Email Address
               </label>
+
               {isEditing ? (
                 <input
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="border-b border-gray-300 focus:outline-none focus:border-green-600 py-2 w-full sm:w-2/3 bg-transparent transition"
+                  className="border-b border-gray-300 focus:border-green-600 py-2 w-2/3 bg-transparent"
                 />
               ) : (
-                <p className="text-gray-800 font-semibold">{user.email || user.Email_ID}</p>
+                <p className="text-gray-800 font-semibold">{formData.email}</p>
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex justify-between items-center">
               <label className="text-gray-600 font-medium flex items-center gap-2">
                 <AiOutlineCalendar className="text-green-600" /> Member Since
               </label>
               <p className="text-gray-800 font-semibold">
-                {user.joinedDate ? new Date(user.joinedDate).toLocaleDateString() : user.createdAt ? new Date(user.createdAt).toLocaleDateString() : "January 2024"}
+                {user.joinedDate ? new Date(user.joinedDate).toLocaleDateString() : "—"}
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center sm:justify-end gap-4 mt-10">
+          <div className="flex justify-end gap-4 mt-10">
             {isEditing ? (
               <>
-                <button onClick={handleSave} className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md font-semibold flex items-center gap-2 hover:bg-green-600 hover:shadow-lg transition">
+                <button
+                  onClick={handleSave}
+                  className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md font-semibold"
+                >
                   <FiCheckCircle size={18} /> Save Changes
                 </button>
-                <button onClick={() => setIsEditing(false)} className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg shadow-sm font-semibold hover:bg-gray-300 transition">
+
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg"
+                >
                   Cancel
                 </button>
               </>
             ) : (
               <>
-                <button onClick={() => setIsEditing(true)} className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md font-semibold flex items-center gap-2 hover:bg-green-600 hover:shadow-lg transition">
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md"
+                >
                   <FiEdit2 size={18} /> Edit Profile
                 </button>
-                <button onClick={handleLogout} className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md font-semibold flex items-center gap-2 hover:bg-red-600 hover:shadow-lg transition">
+
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md"
+                >
                   <IoMdLogOut size={18} /> Logout
                 </button>
               </>
@@ -164,7 +184,7 @@ function Profile() {
           </div>
 
           {isSaved && (
-            <div className="fixed bottom-6 right-6 bg-green-600 text-white px-4 py-2 rounded-md shadow-md flex items-center gap-2 animate-bounce">
+            <div className="fixed bottom-6 right-6 bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 shadow">
               <FiCheckCircle size={20} /> Profile updated successfully!
             </div>
           )}

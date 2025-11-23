@@ -2,6 +2,8 @@
 import { user } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { v2 as cloudinary } from "cloudinary";
+import genrateToken from "../utils/genrateToken.js";
+
 
 export async function Register(req, res) {
   try {
@@ -64,9 +66,12 @@ export async function Register(req, res) {
 
     const savedUser = await newUser.save();
 
+    const jwtToken = await genrateToken(savedUser);
+
     // return user object (important!)
-    return res.status(201).json({
+    return res.status(201).cookie("accessToken", jwtToken.accessToken, jwtToken.Options).json({
       message: "User registered successfully",
+      
       error: false,
       success: true,
       user: {

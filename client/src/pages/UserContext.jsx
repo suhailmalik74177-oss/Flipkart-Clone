@@ -1,4 +1,3 @@
-// client/src/pages/UserContext.jsx
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 const UserContext = createContext();
@@ -9,16 +8,26 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
+
+    if (storedUser) {
+      const parsed = JSON.parse(storedUser);
+      setUser({
+        ...parsed,
+        token: storedToken || parsed.token,
+      });
     }
   }, []);
 
-  // accept a full user object (frontend shape) and optional token
   const saveUser = (userData, token) => {
     if (!userData) return;
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+
+    const finalUser = {
+      ...userData,
+      token: token || userData.token,
+    };
+
+    setUser(finalUser);
+    localStorage.setItem("user", JSON.stringify(finalUser));
     if (token) localStorage.setItem("token", token);
   };
 
